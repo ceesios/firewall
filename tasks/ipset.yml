@@ -37,18 +37,18 @@
 
 - name: ipset | Ensuring /etc/ipset/ Directory Exists
   file:
-    path: "/etc/iptables/"
+    path: "/etc/ipset/"
     state: directory
   tags: ipset
 
 - name: ipset | Generating ipset config
   template:
     src: ipsets.j2
-    dest: "/etc/iptables/ipsets"
+    dest: "/etc/ipset/ipsets"
   register: ipset_config
   tags: ipset
 
 - name: ipset | Restoring ipset Rules
-  shell: ipset restore -exist < /etc/iptables/ipsets
+  shell: ipset restore -exist < /etc/ipset/ipsets
   when: ipset_config.changed
   tags: ipset
