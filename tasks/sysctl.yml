@@ -32,7 +32,7 @@
     sysctl_file=/etc/sysctl.conf
     reload=yes
   with_items: "{{ interfaces }}"
-  when: not firewall_enable_ipv6
+  when: not firewall_enable_ipv6 and not (item is match(":[0-9]+"))
   tags:
     - ipv6
 
